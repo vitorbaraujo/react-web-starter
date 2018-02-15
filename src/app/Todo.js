@@ -5,27 +5,22 @@ export class Todo extends Component {
     super();
     this.state = {
       todos: [],
-      newTodo: '',
     }
-  }
-
-  handleChange(e) {
-    const { value } = e.target
-    this.setState({ newTodo: value })
   }
 
   handleClick(e) {
     console.log('oi')
     e.preventDefault();
-    const todos = [ ...this.state.todos, this.state.newTodo ];
-    this.setState({ todos, newTodo: '' })
+    const todos = [ ...this.state.todos, this.input.value ];
+    this.input.value = '';
+    this.setState({ todos })
   }
 
   render() {
     return (
       <div>
         <form>
-          <input value={this.state.newTodo} onChange={this.handleChange.bind(this)} type="text" placeholder="new todo"/>
+          <input ref={node => this.input = node} type="text" placeholder="new todo"/>
           <button onClick={this.handleClick.bind(this)}>create</button>
         </form>
         <ul>
